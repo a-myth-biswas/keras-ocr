@@ -141,15 +141,15 @@ def get_born_digital_recognizer_dataset(split="train", cache_dir=None):
     data = []
     if cache_dir is None:
         cache_dir = tools.get_default_cache_dir()
-    main_dir = os.path.join(cache_dir, "borndigital")
+    main_dir = os.path.join(cache_dir, "own_ds")
     assert split in ["train", "traintest", "test"], f"Unsupported split: {split}"
     if split in ["train", "traintest"]:
         train_dir = os.path.join(main_dir, "train")
         training_zip_path = tools.download_and_verify(
             url="https://github.com/a-myth-biswas/keras-ocr/releases/download/v0.8.7/DS_KYC_TRAIN_KERAS.zip",  # pylint: disable=line-too-long
-            filename="Challenge1_Training_Task3_Images_GT.zip",
+            filename="DS_KYC_TRAIN_KERAS.zip",
             cache_dir=main_dir,
-            sha256="8ede0639f5a8031d584afd98cee893d1c5275d7f17863afc2cba24b13c932b07",
+            sha256="16f6469f53581f3fdfc11a7afca2a1779e047bb7478fa6a1edbee18e0aa9ba54",
         )
         if (
             len(
@@ -172,7 +172,7 @@ def get_born_digital_recognizer_dataset(split="train", cache_dir=None):
             url="https://github.com/a-myth-biswas/keras-ocr/releases/download/v0.8.7/DS_KYC_TEST_KERAS.zip",
             filename="DS_KYC_TEST_KERAS.zip",
             cache_dir=main_dir,
-            sha256="8f781b0140fd0bac3750530f0924bce5db3341fd314a2fcbe9e0b6ca409a77f0",
+            sha256="e104c6f74b835c44c3d30b2bbd49cda396d1a952fc48a23c595bb669cc57099d",
         )
         if len(glob.glob(os.path.join(test_dir, "*.png"))) != 1439:
             with zipfile.ZipFile(test_zip_path) as zfile:
@@ -181,7 +181,7 @@ def get_born_digital_recognizer_dataset(split="train", cache_dir=None):
             url="https://github.com/a-myth-biswas/keras-ocr/releases/download/v0.8.7/gt.txt",
             cache_dir=test_dir,
             filename="gt.txt",
-            sha256="fce7f1228b7c4c26a59f13f562085148acf063d6690ce51afc395e0a1aabf8be",
+            sha256="4b3f77cceb7d069160624111d73a0c87191d3bef6c4b1ec88fe555988bb4e72d",
         )
         data.extend(
             _read_born_digital_labels_file(
